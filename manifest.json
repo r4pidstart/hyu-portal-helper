@@ -13,7 +13,7 @@
     "default_popup": "settings.html",
     "default_title": "title"
   },
-  "permissions": ["tabs", "*://portal.hanyang.ac.kr/*"],
+  "permissions": ["tabs", "*://portal.hanyang.ac.kr/*", "storage"],
   "content_scripts": 
   [ 
     {
