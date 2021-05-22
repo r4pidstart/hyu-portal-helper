@@ -14,12 +14,14 @@ function click(e)
 
 function page_check(e)
 {
-    // todo
-    // check whether extension is disabled
     try
     {
         var check=document.getElementById('c37_b');
-        click();
+        chrome.storage.sync.get("data", function(items)
+        {
+            if(items.data != 0)
+                setTimeout(click, 500);
+        });
     }
     catch{}
 }
