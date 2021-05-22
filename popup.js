@@ -1,27 +1,44 @@
 
-// function uncheck(e)
-// {
-    //     chrome.tabs.executeScript(null, {file: "uncheck_script.js"});
-    // }
-    
 document.addEventListener('DOMContentLoaded', function()
 {
-    // var uc_btn = document.querySelector('#uncheck_btn');
-    // uc_btn.addEventListener("click", uncheck);
-    var on_btn = document.querySelector('#switch_1');
-    var off_btn = document.querySelector('#switch_0');
-    on_btn.addEventListener("click", getSwitch(1));
-    off_btn.addEventListener("click", getSwitch(0));
-    chrome.storage.sync.get(['switch'], function(result)
+    var on=document.getElementById("switch_1");
+    var off=document.getElementById("switch_0");
+    on.addEventListener("click", setSwitch1);
+    off.addEventListener("click", setSwitch0);
+    chrome.storage.sync.get("data", function(items)
     {
-        if(result.key == 1)
-            document.getElementById('switch_1').checked = true;
-        else
+        if(items.data == 0)
             document.getElementById('switch_0').checked = true;
+        else
+        {
+            document.getElementById('switch_1').checked = true;
+            setSwitch1();
+        }
     });
 });
 
-function getSwitch(event)
+function setSwitch0(e)
 {
-    chrome.storage.sync.set({switch: event}, function(){});
+    chrome.storage.sync.set({"data" : 0}, function(){});
 }
+
+function setSwitch1(e)
+{
+    chrome.storage.sync.set({"data" : 1}, function(){});
+}
+
+// todo
+// 첫 실행시 기본으로 켜지게 하기.
+
+
+// chrome.browserAction.onClicked.addListener(function(tab) {
+//     chrome.storage.sync.get('state', function(data) {
+//       if (data.state === 'on') {
+//         chrome.storage.sync.set({state: 'off'});
+//         //do something, removing the script or whatever
+//       } else {
+//         chrome.storage.sync.set({state: 'on'});
+//         //inject your script
+//       }
+//     });
+//   });
