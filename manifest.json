@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "HYU Self Check",
-  "description": "Do 'corona 19 self check' automatically.",
+  "description": "Do 'Corona 19 Self Check' automatically.",
   "version": "1.0",
   "browser_action":
   {
