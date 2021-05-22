@@ -26,19 +26,3 @@ function setSwitch1(e)
 {
     chrome.storage.sync.set({"data" : 1}, function(){});
 }
-
-// todo
-// 첫 실행시 기본으로 켜지게 하기.
-
-
-// chrome.browserAction.onClicked.addListener(function(tab) {
-//     chrome.storage.sync.get('state', function(data) {
-//       if (data.state === 'on') {
-//         chrome.storage.sync.set({state: 'off'});
-//         //do something, removing the script or whatever
-//       } else {
-//         chrome.storage.sync.set({state: 'on'});
-//         //inject your script
-//       }
-//     });
-//   });

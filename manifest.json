@@ -13,6 +13,11 @@
     "default_popup": "settings.html",
     "default_title": "title"
   },
+  "icons":
+  {
+    "128": "128.png",
+    "64" : "64.png"
+  },
   "permissions": ["tabs", "*://portal.hanyang.ac.kr/*", "storage"],
   "content_scripts": 
   [ 
