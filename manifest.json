@@ -1,13 +1,9 @@
 {
 
   "manifest_version": 2,
-  "name": "hyu-self-check-extension",
-  "description": "do self-check automately",
+  "name": "HYU Self Check",
+  "description": "do corona 19 self check automately",
   "version": "1.0",
-  "background":
-  {
-    "service_worker": "background.js"
-  },
   "browser_action":
   {
     "default_popup": "settings.html",
