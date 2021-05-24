@@ -11,10 +11,10 @@
   },
   "icons":
   {
-    "128": "128.png",
-    "64" : "64.png"
+    "128": "logo_128.png",
+    "64" : "logo_64.png"
   },
-  "permissions": ["tabs", "storage"],
+  "permissions": ["storage"],
   "content_scripts": 
   [ 
     {
