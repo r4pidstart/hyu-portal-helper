@@ -20,8 +20,8 @@ function page_check(e)
 {
     try
     {
-        var check=document.getElementById('c37_b');
-        chrome.storage.sync.get("data", function(items)
+        let check=document.getElementById('c37_b');
+        browser.storage.sync.get("data", function(items)
         {
             if(items.data != 0)
                 setTimeout(click, 700);

@@ -21,5 +21,12 @@
     "js": ["js/start.js"],
     "run_at": "document_end"
     } 
-  ]
+  ],
+  "browser_specific_settings":
+  {
+    "gecko":
+    {
+      "id": "{f04bbf73-895a-4658-9195-28c2e6d61a2a}"
+    }
+  }
 }
