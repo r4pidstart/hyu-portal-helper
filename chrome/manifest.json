@@ -1,5 +1,4 @@
 {
-
   "manifest_version": 2,
   "name": "HYU Self Check",
   "description": "Do 'Corona 19 Self Check' automatically.",
@@ -11,15 +10,15 @@
   },
   "icons":
   {
-    "128": "logo_128.png",
-    "64" : "logo_64.png"
+    "128": "img/logo_128.png",
+    "64" : "img/logo_64.png"
   },
   "permissions": ["storage"],
   "content_scripts": 
   [ 
     {
     "matches": ["*://portal.hanyang.ac.kr/*"],
-    "js": ["start.js"],
+    "js": ["js/start.js"],
     "run_at": "document_end"
     } 
   ]
