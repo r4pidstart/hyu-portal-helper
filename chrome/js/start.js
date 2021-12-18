@@ -16,62 +16,50 @@ function click_corona(e)
     catch{ setTimeout(click_corona, 500); }
 }
 
-function click_lecture_eval(e)
+function click_eval(e)
 {
-    console.log("eval");
     try{ document.getElementById('popupBlock').style.zIndex=-1; } catch{}
+
+    let value=5;
+
+    if(btnTimer != null)
+        clearInterval(btnTimer);
+    
+    try
+    {
+        if(document.querySelector("#svContents > table > tbody > tr > td > table > tbody > tr:nth-child(1) > td").innerText == "학과 교육만족도 설문조사")
+            value=1;
+    }
+    catch{}
 
     try
     {
         let items=document.querySelectorAll("input[type=radio]");
         for(let i=0; i<items.length; i++)
-            if(items[i].value==5) 
+            if(items[i].value==value) 
                 items[i].checked = true;
     }
     catch{ setTimeout(click_lecture_eval, 500); }
 }
 
-let config = { attributes: true, childList: true, characterData: true };
-let surveyObserverToggle=false, evalObserber=false;
-function find_survey(e)
-{
-    try
-    {
-        // lecture survey
-        if(surveyObserverToggle == false)
-        {
-            if(document.querySelector(".txt_title").innerText == "금학기성적조회")
-            {
-                let survey_ob = new MutationObserver(function(e) 
-                {
-                    console.log("TEST survey1");
-                    if(document.querySelector("#titleNm").innerText == "「C-한양핵심역량」 설문 조사")
-                    {
-                        console.log("TEST survey2");
-                        setTimeout(click_lecture_eval, 300);
-                    }
-                });
-                survey_ob.observe(document.querySelector("#titleNm").innerText, config);
-                surveyObserverToggle=true;
-            }
-        }
-        else
-        {
-            if(document.querySelector(".txt_title").innerText != "금학기성적조회")
-            {
-                survey_ob.disconnect();
-                surveyObserverToggle=false;
-            }
-        }
-    }
-    catch{}
-}
-
+let btnTimer=null;
 function page_check(e)
 {
-    let observer = new MutationObserver(function(e) { find_survey(); });
+    let config = { attributes: true, childList: true, characterData: true };
+    let mainOb = new MutationObserver(function(e) 
+    { 
+        // lecture survey
+        try
+        { 
+            if(document.querySelector(".txt_title").innerText == "금학기성적조회") 
+                if(document.querySelector("#hyinContents > div.popupComponent.mediumHeader.ui-draggable").style.display == "block")
+                    setTimeout(click_eval, 300);
+        }
+        catch{}
+    });
     
-    try{ observer.observe(document.querySelector("#hyinContents"), config); } catch{}
+    try{ mainOb.observe(document.querySelector("#hyinContents"), config); } catch{}
+
 
     try
     {
@@ -85,15 +73,38 @@ function page_check(e)
     }
     catch{}
 
-    try
+    // lecture evaluation
+    let timerCnt=0;
+    let chkTimer = setInterval(function(e)
     {
-        // lecture evaluation
-        if(document.querySelector("#btn_Confirm").value == "강의평가입력")
-            if(document.querySelector('#hyinContents > div.popupComponent.mediumHeader.ui-draggable > h1').innerText == "강의평가문항입력")
-                observer.observe(document.querySelector("#hyinContents > div.popupComponent.mediumHeader.ui-draggable"), config);
-        console.log("observe eval");
-    }
-    catch{}
+        timerCnt++;
+        if(timerCnt>7) 
+        {
+            clearTimeout(chkTimer);
+            clearTimeout(btnTimer);
+            return;
+        }
+        try
+        {
+            if(document.querySelector("#hyinContents > div.popupComponent.mediumHeader > h1").innerText == "강의평가문항입력")
+            {
+                btnTimer = setInterval(function()
+                {
+                    try
+                    {
+                        let btn = document.querySelectorAll("#btn_Confirm");
+                        for(let i=0; i<btn.length; i++)
+                            btn[i].addEventListener("click", function(){ setTimeout(click_eval, 300); });
+                        clearTimeout(chkTimer);
+                    }
+                    catch{}
+                }, 300);
+            }
+            else
+                clearTimeout(chkTimer);
+        }
+        catch{}
+    }, 300);
 }
 
 window.onload = page_check;
