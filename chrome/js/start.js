@@ -1,12 +1,6 @@
 // https://portal.hanyang.ac.kr/openPage.do?pgmId=P320980&tk=daad9bae1afb44e5c91969df5d1031b326e3fea62674ed9f101a5948cd5909f9
 
-let injectedCode = 'handlers()';
-let script = document.createElement('script');
-script.appendChild(document.createTextNode('('+ injectedCode +')();'));
-(document.body || document.head || document.documentElement).appendChild(script);
-
-// on off check
-let flag;
+let flag; // on off check
 
 function click_corona(e)
 {
@@ -104,4 +98,3 @@ function checkWhetherEvalPage(e)
 chrome.storage.sync.get("data", function(items){flag=items.data;});
 document.body.addEventListener("click", checkWhetherEvalPage, { once: true });
 window.onload = page_check;
-
