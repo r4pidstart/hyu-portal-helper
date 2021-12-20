@@ -1,5 +1,13 @@
 // https://portal.hanyang.ac.kr/openPage.do?pgmId=P320980&tk=daad9bae1afb44e5c91969df5d1031b326e3fea62674ed9f101a5948cd5909f9
 
+let injectedCode = 'handlers()';
+let script = document.createElement('script');
+script.appendChild(document.createTextNode('('+ injectedCode +')();'));
+(document.body || document.head || document.documentElement).appendChild(script);
+
+// on off check
+let flag;
+
 function click_corona(e)
 {
     try
@@ -16,15 +24,22 @@ function click_corona(e)
     catch{ setTimeout(click_corona, 500); }
 }
 
+function exec_handler(e)
+{
+    handlers.radioClickHandler(btns[i], i+2); 
+    console.log(btns[i] + " is checked" + btns[i].checked);
+}
+
 function click_radio(e)
 {
-    console.log(e);
+    let btns=document.querySelectorAll("input[type=radio]");
     try
     {
-        let btns=document.querySelectorAll("input[type=radio]");
-        for(let btn of btns)
-            if(btn.value==e.target.defaultValue) 
-                btn.checked = true;
+        for(let i=5; i<btns.length; i++)
+            if(btns[i].value==e.target.defaultValue)
+            {
+                btns[i].click();
+            }
     }
     catch{}
 }
@@ -34,15 +49,12 @@ function click_eval(e)
     try{ document.getElementById('popupBlock').style.zIndex=-1; } catch{}
 
     let btns = document.querySelectorAll("input[type=radio]");
-    for(let btn of btns)
-        btn.addEventListener("click", click_radio);
-    console.log(btns);
+    for(let i=0; i<5; i++)
+        btns[i].addEventListener("click", click_radio);
 }
 
 function page_check(e)
 {
-    // on off check
-    let flag;
     chrome.storage.sync.get("data", function(items){flag=items.data;});
     if(!flag) return;
 
@@ -72,9 +84,6 @@ function page_check(e)
 
 function checkWhetherEvalPage(e)
 {
-    // on off check
-    let flag;
-    chrome.storage.sync.get("data", function(items){flag=items.data;});
     if(!flag) return;
 
     try
@@ -92,6 +101,7 @@ function checkWhetherEvalPage(e)
     catch{}
 }
 
+chrome.storage.sync.get("data", function(items){flag=items.data;});
 document.body.addEventListener("click", checkWhetherEvalPage, { once: true });
 window.onload = page_check;
 
