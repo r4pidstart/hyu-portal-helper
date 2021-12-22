@@ -80,6 +80,18 @@ function checkWhetherEvalPage(e)
 {
     if(!flag) return;
 
+    // survey
+    try
+    {
+        if(document.querySelector("#svContents > table > tbody > tr > td > table > tbody > tr.even > td").innerText == "「교양 교과목 「C-한양핵심역량」 설문 조사」")
+        {
+            alert("다시 클릭해주세요.");
+            click_eval();
+        }
+    }
+    catch{}
+
+    // eval
     try
     {
         if(document.querySelector("#hyinContents > div.popupComponent.mediumHeader > h1").innerText == "강의평가문항입력")
