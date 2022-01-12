@@ -53,8 +53,8 @@ function page_check(e)
     if(!flag) return;
 
     // lecture survey
-    let config = { attributes: true, childList: true, characterData: true };
-    let mainOb = new MutationObserver(function() 
+    const config = { attributes: true, childList: true, characterData: true };
+    const mainOb = new MutationObserver(function() 
     { 
         try
         { 
@@ -74,9 +74,21 @@ function page_check(e)
         setTimeout(click_corona, 700);
     }
     catch{}
+
+    // pw change
+    try
+    {
+        if(document.querySelector(".pw_change"))
+            try
+            {
+                document.querySelector("#btn_cancel").click();
+            }
+            catch{}
+    }
+    catch{}
 }
 
-function checkPage(e)
+function checkWhetherEvalPage(e)
 {
     if(!flag) return;
 
@@ -101,18 +113,6 @@ function checkPage(e)
                 for(let i=0; i<btn.length; i++)
                     btn[i].addEventListener("click", function(){setTimeout(click_eval, 300);});
                 setTimeout(click_eval, 300);
-            }
-            catch{}
-    }
-    catch{}
-
-    // pw change
-    try
-    {
-        if(document.querySelector(".pw_change"))
-            try
-            {
-                document.querySelector("#btn_cancel").click();
             }
             catch{}
     }
