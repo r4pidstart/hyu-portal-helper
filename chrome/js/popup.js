@@ -1,17 +1,17 @@
 
-document.addEventListener('DOMContentLoaded', function()
+document.addEventListener("DOMContentLoaded", function()
 {
-    var on=document.getElementById("switch_1");
-    var off=document.getElementById("switch_0");
+    const on=document.getElementById("switch_1");
+    const off=document.getElementById("switch_0");
     on.addEventListener("click", setSwitch1);
     off.addEventListener("click", setSwitch0);
     chrome.storage.sync.get("data", function(items)
     {
         if(items.data == 0)
-            document.getElementById('switch_0').checked = true;
+            document.getElementById("switch_0").checked = true;
         else
         {
-            document.getElementById('switch_1').checked = true;
+            document.getElementById("switch_1").checked = true;
             setSwitch1();
         }
     });

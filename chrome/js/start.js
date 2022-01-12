@@ -22,11 +22,11 @@ function exec_handler(e)
 {
     handlers.radioClickHandler(btns[i], i+2); 
     console.log(btns[i] + " is checked" + btns[i].checked);
-}
+} 
 
 function click_radio(e)
 {
-    let btns=document.querySelectorAll("input[type=radio]");
+    const btns=document.querySelectorAll("input[type=radio]");
     try
     {
         for(let i=5; i<btns.length; i++)
@@ -54,7 +54,7 @@ function page_check(e)
 
     // lecture survey
     let config = { attributes: true, childList: true, characterData: true };
-    let mainOb = new MutationObserver(function(e) 
+    let mainOb = new MutationObserver(function() 
     { 
         try
         { 
@@ -76,7 +76,7 @@ function page_check(e)
     catch{}
 }
 
-function checkWhetherEvalPage(e)
+function checkPage(e)
 {
     if(!flag) return;
 
@@ -101,6 +101,18 @@ function checkWhetherEvalPage(e)
                 for(let i=0; i<btn.length; i++)
                     btn[i].addEventListener("click", function(){setTimeout(click_eval, 300);});
                 setTimeout(click_eval, 300);
+            }
+            catch{}
+    }
+    catch{}
+
+    // pw change
+    try
+    {
+        if(document.querySelector(".pw_change"))
+            try
+            {
+                document.querySelector("#btn_cancel").click();
             }
             catch{}
     }
