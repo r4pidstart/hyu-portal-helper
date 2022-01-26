@@ -18,12 +18,6 @@ function click_corona(e)
     catch{ setTimeout(click_corona, 500); }
 }
 
-function exec_handler(e)
-{
-    handlers.radioClickHandler(btns[i], i+2); 
-    console.log(btns[i] + " is checked" + btns[i].checked);
-} 
-
 function click_radio(e)
 {
     const btns=document.querySelectorAll("input[type=radio]");
