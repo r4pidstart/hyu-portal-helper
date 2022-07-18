@@ -116,3 +116,30 @@ function checkWhetherEvalPage(e)
 chrome.storage.sync.get("data", function(items){flag=items.data;});
 document.body.addEventListener("click", checkWhetherEvalPage, { once: true });
 window.onload = page_check;
+
+// sugang
+try
+{
+    if(document.querySelector("li.pt-10.hakjeom-area"))
+    {
+        let sugang_observer = new MutationObserver(() =>{
+            const block = document.querySelector("#popupBlock");
+            if(block)
+                block.style.zIndex = -1;
+        
+            // delete multiple lectures
+            const lecture_list = document.querySelector("#gdMain > tBody").children;
+            for(let i=1; i<lecture_list.length; i++)
+            {
+                console.log(`${lecture_list[i].querySelector("#suupNo2").innerText} and ${lecture_list[i-1].querySelector("#suupNo2").innerText}`);
+                if(lecture_list[i].querySelector("#suupNo2").innerText == lecture_list[i-1].querySelector("#suupNo2").innerText)
+                    lecture_list[i--].remove();
+            }
+        });
+        
+        let main_form = document.querySelector("#hyinContents");
+        let options = { attributes: true, childList: true, characterData: true };
+        sugang_observer.observe(main_form, options);
+    }
+}
+catch{}
