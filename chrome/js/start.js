@@ -97,18 +97,26 @@ try
     if(document.querySelector("li.pt-10.hakjeom-area"))
     {
         let sugang_observer = new MutationObserver(() =>{
-            const block = document.querySelector("#popupBlock");
-            if(block)
+            // remove blank popup
+            if(document.querySelector("#popupBlock"))
                 block.style.zIndex = -1;
         
-            // // delete multiple lectures
-            // const lecture_list = document.querySelector("#gdMain > tBody").children;
-            // for(let i=1; i<lecture_list.length; i++)
-            // {
-            //     console.log(`${lecture_list[i].querySelector("#suupNo2").innerText} and ${lecture_list[i-1].querySelector("#suupNo2").innerText}`);
-            //     if(lecture_list[i].querySelector("#suupNo2").innerText == lecture_list[i-1].querySelector("#suupNo2").innerText)
-            //         lecture_list[i--].remove();
-            // }
+            // delete multiple lectures
+            if(document.querySelector("#gdMain > tBody"))
+            {
+                const lecture_list = document.querySelector("#gdMain > tBody").children;
+                if(lecture_list)
+                {
+                    for(let i=1; i<lecture_list.length; i++)
+                        if(lecture_list[i].querySelector("#suupNo2").innerText == lecture_list[i-1].querySelector("#suupNo2").innerText)
+                            lecture_list[i].style="display:none";
+                }
+
+                let div=document.createElement("div");
+                div.append(document.createTextNode("HYU Portal Helper가 중복된 강의를 제거했습니다."));
+                div.style="float:right";
+                document.querySelector("#pagingPanel").append(div);
+            }
         });
         
         let main_form = document.querySelector("#hyinContents");
