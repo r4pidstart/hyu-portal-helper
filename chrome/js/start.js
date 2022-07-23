@@ -101,14 +101,14 @@ try
             if(block)
                 block.style.zIndex = -1;
         
-            // delete multiple lectures
-            const lecture_list = document.querySelector("#gdMain > tBody").children;
-            for(let i=1; i<lecture_list.length; i++)
-            {
-                console.log(`${lecture_list[i].querySelector("#suupNo2").innerText} and ${lecture_list[i-1].querySelector("#suupNo2").innerText}`);
-                if(lecture_list[i].querySelector("#suupNo2").innerText == lecture_list[i-1].querySelector("#suupNo2").innerText)
-                    lecture_list[i--].remove();
-            }
+            // // delete multiple lectures
+            // const lecture_list = document.querySelector("#gdMain > tBody").children;
+            // for(let i=1; i<lecture_list.length; i++)
+            // {
+            //     console.log(`${lecture_list[i].querySelector("#suupNo2").innerText} and ${lecture_list[i-1].querySelector("#suupNo2").innerText}`);
+            //     if(lecture_list[i].querySelector("#suupNo2").innerText == lecture_list[i-1].querySelector("#suupNo2").innerText)
+            //         lecture_list[i--].remove();
+            // }
         });
         
         let main_form = document.querySelector("#hyinContents");

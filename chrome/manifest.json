@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "HYU Portal helper",
   "description": "한양대 포탈을 편리하게",
-  "version": "2.4",
+  "version": "2.4.1",
   "browser_action":
   {
     "default_popup": "settings.html",
